@@ -9,7 +9,7 @@ const Home = () =>{
         <div>
             <p>메인 페이지 입니다.</p>
             <nav>
-                <Link to="/makeNick">채팅창하러 가기</Link>
+                <Link to="/makeNick">닉네임 만들기</Link>
             </nav>
         </div>
     )
