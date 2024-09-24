@@ -1,0 +1,12 @@
+npm init -y
+npm install express
+
+
+
+npm install electron (프론트)
+npm install axios
+
+
+실행 
+
+node app.js
