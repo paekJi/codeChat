@@ -3,10 +3,17 @@ npm install express
 
 
 
-npm install electron (프론트)
+(프론트)
+npm install electron 
 npm install axios
+npm i @socket.io/admin-ui
 
 
 실행 
 
-node app.js
+node app.js ==> server 
+npm run start ==> client 
+
+
+
+
