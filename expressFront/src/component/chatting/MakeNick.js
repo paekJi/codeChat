@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 
 const MakeNick = () => {
   const [nickName, setNickName] = useState("");
@@ -7,10 +7,10 @@ const MakeNick = () => {
 
   const enterChat = () => {
     if (nickName.length <= 0) {
-      window.confirm("닉네임을 입력해주세요");
+      window.confirm("check nickName");
       return;
     } else {
-      navigator("/chat", { state: { nickName: nickName } });
+      navigator("/chat", { state: { nickName: nickName }});
     }
   };
 

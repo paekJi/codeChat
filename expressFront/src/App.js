@@ -1,21 +1,25 @@
-import React, { useState, useEffect } from "react";
-import { Link, Route, Routes } from "react-router-dom";
-import ChatPage from "./chatting/ChatPage";
-import NotFoundPage from "../public/NotFountPage";
+import React from "react";
+import {Route, Routes } from "react-router-dom";
+import ChatPage from "./component/chatting/ChatPage";
 import Home from "./Home";
-import MakeNick from "./chatting/MakeNick";
+import NotFoundPage from "./NotFountPage";
+import UserLogin from "./component/user/userLogin";
+import UserSignIn from "./component/user/userSignIn";
 function App() {
-  const [message, setMessage] = useState("");
-
-  useEffect(() => {
-  }, []);
 
   return (
     <div>
       <Routes>
         <Route path="/" element={<Home />} />
+
+        {/** user */}
+        <Route path="/login" element={<UserLogin />} />
+        <Route path="/signIn" element={<UserSignIn />} />
+
+        {/** chat */}
         <Route path="/chat" element={<ChatPage />} />
-        <Route path="/makeNick" element={<MakeNick/>} />
+
+        {/** error redirect */}
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
