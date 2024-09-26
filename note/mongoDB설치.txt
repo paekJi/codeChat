@@ -1,0 +1,3 @@
+https://www.mongodb.com/ko-kr/docs/mongodb-shell/install/
+
+https://www.mongodb.com/ko-kr/docs/manual/tutorial/install-mongodb-on-windows/

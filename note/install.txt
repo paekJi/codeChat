@@ -1,6 +1,8 @@
+
+(서버)
 npm init -y
 npm install express
-
+npm install mongoose
 
 
 (프론트)
