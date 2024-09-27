@@ -1,10 +1,48 @@
+import axios from "axios";
+import React, { useState } from "react";
+import { AppConfig } from "../../config/config";
+
 const UserSignIn = () => {
+  //signin information
+  const [signInInfo, setSignInInfo] = useState({
+    userId: "",
+    password: "",
+  });
+
+  /** signIn process */
+  const signInProcess = async (e) => {
+    e.preventDefault();
+    if (signInInfo.userId && signInInfo.password) {
+      try {
+        const response = await axios.post(AppConfig.serverAddress + "/api/signIn", signInInfo, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        console.log(response);
+      } catch (error) {
+
+         alert("An unknown error occurred");
+         console.log(error);
+      }
+    }
+  };
+
+  /** login imformation change action */
+  const signInChange = (e) => {
+    const { name, value } = e.target;
+    setSignInInfo({
+      ...signInInfo,
+      [name]: value,
+    });
+  };
+
   return (
     <div>
       <p>회원가입 페이지</p>
-      <form>
-        <input type="text" placeholder="name" />
-        <input type="password" />
+      <form onSubmit={signInProcess}>
+        <input type="text" name="userId" placeholder="name" onChange={signInChange} />
+        <input type="password" name="password" onChange={signInChange} />
         <button type="submit">회원가입 하기</button>
       </form>
     </div>

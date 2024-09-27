@@ -1,19 +1,14 @@
+"use strict";
+
 module.exports = (io) => {
-
   io.on("connection", (socket) => {
-
-    socket.on("client-event", (msg)=>{
+    socket.on("client-event", (msg) => {
       console.log("received client message ==> " + msg);
       io.emit("server-event", "server message");
     });
-
-
-
-    
-
   });
 
-/*
+  /*
   io.on("connection", (socket) => {
 
     var userNick = socket.handshake.query.nickName;
