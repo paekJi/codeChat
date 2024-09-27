@@ -19,7 +19,7 @@ const loginChk = async (req) => {
                     accessToken : tokenService.makeAccessToken(userId),
                     refeshToken : tokenService.makeRefreshToken(userId)
                 }
-                await User.updateOne({ userId: userId }, { refreshToken: userToken.refeshToken });
+                await User.updateOne({ userId: userId }, { refreshToken: userToken.refeshToken, tokenUpdate: new Date() });
                 
                 return userToken;
             }

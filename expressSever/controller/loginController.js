@@ -8,8 +8,6 @@ const appConfig = require("../config/config");
 /** user info chk  */
 const loginChk = async (req, res) => {
   const userToken = await loginService.loginChk(req);
-    console.log(userToken);
-
   if (userToken) {
         res.cookie("refreshToken", userToken.refreshToken, {
           httpOnly: true,

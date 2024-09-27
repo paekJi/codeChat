@@ -19,10 +19,6 @@ const makeRefreshToken = (userId) => {
   return refreshToken;
 };
 
-// refresh token verification
-const refreshTokenVerify = async (token, userId) => {
-
-};
 
 // access token verification
 const accessTokenVerify = (token) => {
@@ -30,7 +26,7 @@ const accessTokenVerify = (token) => {
     const decoded = jwt.verify(token, JWT_KEY);
     return {
       ok: true,
-      id: decoded.id,
+      userId: decoded.userId,
     };
   } catch (error) {
     return {
@@ -38,6 +34,11 @@ const accessTokenVerify = (token) => {
       message: error.message,
     };
   }
+};
+
+// refresh token verification
+const refreshTokenVerify = async (token, userId) => {
+
 };
 
 module.exports = {

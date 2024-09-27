@@ -7,6 +7,7 @@ const userSchema = mongoose.Schema({
   password: String,
   profileImg: String,
   refreshToken : String,
+  tokenUpdate : Date,
   createDate: Date,
 });
 
