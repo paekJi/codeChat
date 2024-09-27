@@ -6,7 +6,7 @@ npm install mongoose
 npm install bcrypt  => 유저 정보 해싱 
 npm install jsonwebtoken  => 토큰 검증 
 npm install dotenv	 => 토ㅓ큰검증 
-
+npm install winston winston-daily-rotate-file
 
 (프론트)
 npm install electron 
@@ -22,3 +22,6 @@ npm run start ==> client
 
 
 
+실행 환경변수 NODE_ENV
+NODE_ENV=dev app.js처럼..
+실서버에서는 꼭 환경변수 넣어줘야함 

@@ -23,8 +23,6 @@ const UserLogin = () => {
             },
           });
 
-          // localStorage.setItem("token", response.data.token);
-          // localStorage.setItem("userId", loginInfo.userId);
           console.log(response);
           
       } catch (error) {
