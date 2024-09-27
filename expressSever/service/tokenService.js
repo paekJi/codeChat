@@ -26,18 +26,7 @@ const refreshTokenVerify = async (token, userId) => {
 
 // access token verification
 const accessTokenVerify = (token) => {
-  try {
-    const decoded = jwt.verify(token, JWT_KEY);
-    return {
-      ok: true,
-      id: decoded.id,
-    };
-  } catch (error) {
-    return {
-      ok: false,
-      message: error.message,
-    };
-  }
+
 };
 
 module.exports = {
