@@ -8,13 +8,16 @@ const appConfig = require("../config/config");
 /** user info chk  */
 const loginChk = async (req, res) => {
   const userToken = await loginService.loginChk(req);
+    console.log(userToken);
+
   if (userToken) {
-        res.cookie("refreshToken", userToken.refeshToken, {
+        res.cookie("refreshToken", userToken.refreshToken, {
           httpOnly: true,
           secure: appConfig.httpYn,
           maxAge: 30 * 24 * 60 * 60 * 1000,
         });
-    res.status(200).json({accessToken : userToken.accessToken});
+
+    res.status(200).json(userToken);
   } else {
     res.status(401).json({message : "error"});
   }
