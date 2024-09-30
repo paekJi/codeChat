@@ -7,16 +7,13 @@ import { UserContext } from "../../provider/loginProvider";
 
 const ChatPage = ()=> {
   const [roomList, setRoomList] = useState([]);
-   const [userList, setUserList] = useState([]);
+  const [userList, setUserList] = useState([]);
 
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
 
-
   const[serverMsg, setServerMsg] = useState("");
-
   const location = useLocation();
-  // const { isLogin, userId } = useContext(UserContext);
  
   // const nickName = location.state.nickName!== ? "" :"";
 
@@ -25,7 +22,7 @@ const ChatPage = ()=> {
   const socket = io("http://localhost:3000");
 
   useEffect(()=>{
-
+    
     //socket connection verify  - not custom, basic event 
     socket.on("connect", ()=>{
       console.log(socket.id);

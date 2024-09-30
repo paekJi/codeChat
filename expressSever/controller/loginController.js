@@ -6,12 +6,12 @@ const loginService = require("../service/loginService");
 const tokenService =  require("../service/tokenService");
 
 const appConfig = require("../config/config");
+const logger = require("../config/winston").logger;
 
 /** user info chk  */
 const loginChk = async (req, res) => {
   const userToken = await loginService.loginChk(req);
   if (userToken) {
-        console.log( "httpYn" , appConfig.httpYn);
         res.cookie("accessToken", userToken.accessToken, {
             httpOnly: true,
             secure: appConfig.httpYn,
@@ -60,7 +60,6 @@ const verificationUser = (req, res) => {
             maxAge: 30 * 24 * 60 * 60 * 1000,
           });
           
-          console.log(verifyRefresh);
           res.status(200).json({ userId: verifyRefresh.userId });
           // expired token
         } else {
@@ -68,7 +67,7 @@ const verificationUser = (req, res) => {
         }
       }
     } catch (error) {  
-        console.log(error);
+        logger.info(error);
         res.status(401).json({message : "error"});
     }
    
