@@ -1,5 +1,6 @@
 const winston = require("winston");
 const winstonDaily = require("winston-daily-rotate-file"); 
+const dotenv = require("dotenv");
 
 const logDir = "logs"; // logs 디렉토리 하위에 로그 파일 저장
 const { combine, timestamp, printf } = winston.format;
@@ -41,8 +42,14 @@ const logger = winston.createLogger({
   ],
 });
 
+logger.stream = {// morgan wiston 설정
+  write: message => {
+      logger.info(message);
+  }
+} 
+
 // Production 환경이 아닌 경우(dev 등)
-if (process.env.NODE_ENV !== "production") {
+if (process.env.NODE_ENV !== "dev") {
   logger.add(
     new winston.transports.Console({
       format: winston.format.combine(

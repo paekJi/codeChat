@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 
 const User = require("../model/user");
 const tokenService = require("../service/tokenService");
-const logger = require("../config/winston");
+const logger = require("../config/winston").logger;
 
 /* login info compare */
 const loginChk = async (req) => {
@@ -20,7 +20,7 @@ const loginChk = async (req) => {
                     refreshToken : tokenService.makeRefreshToken(userId),
                 }
                 await User.updateOne({ userId: userId }, { refreshToken: userToken.refreshToken, tokenUpdate: new Date() });
-                
+                logger.info(`user login : ${user}`);
                 return userToken;
             }
         }else{
@@ -44,10 +44,10 @@ const SignIn = async (req) => {
         // save user
         const newUser = new User({ userId, password: hashedpass, createDate: new Date() });
         await newUser.save();
-
+        logger.info("user sign in : ", newUser );
         processResult = true;
     }catch(error){
-        // logger.error(error);
+        logger.error(error);
         console.log(error)
     }
 
