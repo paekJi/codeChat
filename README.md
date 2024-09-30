@@ -16,6 +16,7 @@
 #### SERVER
 - node.js / express
 - mongoDB
+- morgan / winston logging 
 
 #### CLIENT 
 - electron
