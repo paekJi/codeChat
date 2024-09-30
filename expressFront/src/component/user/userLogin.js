@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import { AppConfig } from "../../config/config";
+import { useNavigate } from "react-router-dom";
 
 const UserLogin = () => {
+  const navigate = useNavigate();
 
   //login information
   const [loginInfo, setLoginInfo] = useState({
@@ -22,9 +24,7 @@ const UserLogin = () => {
               "Content-Type": "application/json",
             },
           });
-
-          console.log(response);
-          
+          navigate("/chat");
       } catch (error) {
         /** user info doesnt exist */
         if(error.response.status == 401){

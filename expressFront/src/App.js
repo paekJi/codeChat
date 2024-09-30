@@ -5,22 +5,22 @@ import Home from "./Home";
 import NotFoundPage from "./NotFountPage";
 import UserLogin from "./component/user/userLogin";
 import UserSignIn from "./component/user/userSignIn";
+import PrivateRoute from "./router/privateRoute";
 function App() {
 
   return (
     <div>
       <Routes>
         <Route path="/" element={<Home />} />
-
-        {/** user */}
         <Route path="/login" element={<UserLogin />} />
         <Route path="/signIn" element={<UserSignIn />} />
-
-        {/** chat */}
-        <Route path="/chat" element={<ChatPage />} />
-
-        {/** error redirect */}
         <Route path="*" element={<NotFoundPage />} />
+
+
+        <Route element={<PrivateRoute />}>
+          {/** chat */}
+          <Route path="/chat" element={<ChatPage />} />
+        </Route>
       </Routes>
     </div>
   );

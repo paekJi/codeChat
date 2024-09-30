@@ -24,6 +24,7 @@ const UserSignIn = () => {
 
          alert("An unknown error occurred");
          console.log(error);
+        /** user info doesnt exist */
       }
     }
   };

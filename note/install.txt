@@ -7,11 +7,14 @@ npm install bcrypt  => 유저 정보 해싱
 npm install jsonwebtoken  => 토큰 검증 
 npm install dotenv	 => 토ㅓ큰검증 
 npm install winston winston-daily-rotate-file
+npm install cookie-parser
 
 (프론트)
 npm install electron 
 npm install axios
 npm i @socket.io/admin-ui
+npm install redux react-redux
+@reduxjs/toolkit
 
 
 실행 
