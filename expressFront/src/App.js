@@ -6,22 +6,27 @@ import NotFoundPage from "./NotFountPage";
 import UserLogin from "./component/user/userLogin";
 import UserSignIn from "./component/user/userSignIn";
 import PrivateRoute from "./router/privateRoute";
+import UserProvider from "./provider/loginProvider";
 function App() {
 
+  
   return (
     <div>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/login" element={<UserLogin />} />
-        <Route path="/signIn" element={<UserSignIn />} />
-        <Route path="*" element={<NotFoundPage />} />
+
+      <UserProvider>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<UserLogin />} />
+          <Route path="/signIn" element={<UserSignIn />} />
+          <Route path="*" element={<NotFoundPage />} />
 
 
-        <Route element={<PrivateRoute />}>
-          {/** chat */}
-          <Route path="/chat" element={<ChatPage />} />
-        </Route>
-      </Routes>
+          <Route element={<PrivateRoute />}>
+            {/** chat */}
+            <Route path="/chat" element={<ChatPage />} />
+          </Route>
+        </Routes>
+      </UserProvider>
     </div>
   );
 }

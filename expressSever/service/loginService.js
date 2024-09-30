@@ -17,9 +17,9 @@ const loginChk = async (req) => {
                 //token save 
                 const userToken = {
                     accessToken : tokenService.makeAccessToken(userId),
-                    refeshToken : tokenService.makeRefreshToken(userId),
+                    refreshToken : tokenService.makeRefreshToken(userId),
                 }
-                await User.updateOne({ userId: userId }, { refreshToken: userToken.refeshToken, tokenUpdate: new Date() });
+                await User.updateOne({ userId: userId }, { refreshToken: userToken.refreshToken, tokenUpdate: new Date() });
                 
                 return userToken;
             }
@@ -46,8 +46,6 @@ const SignIn = async (req) => {
         await newUser.save();
 
         processResult = true;
-
-        console.log("이보세요");
     }catch(error){
         // logger.error(error);
         console.log(error)
@@ -56,12 +54,6 @@ const SignIn = async (req) => {
     return processResult;
 }
 
-
-const makeNewToken = (req) => {
-    
-    
-
-}
 
 
 const hashedPassword = async (password) => {
@@ -73,6 +65,5 @@ const hashedPassword = async (password) => {
 
 module.exports = {
   loginChk,
-  SignIn,
-  makeNewToken,
+  SignIn
 };

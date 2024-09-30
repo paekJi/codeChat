@@ -12,13 +12,11 @@ const loginChk = async (req, res) => {
   const userToken = await loginService.loginChk(req);
   if (userToken) {
         console.log( "httpYn" , appConfig.httpYn);
-        res.cookie("accesstoken", userToken.accessToken, {
+        res.cookie("accessToken", userToken.accessToken, {
             httpOnly: true,
             secure: appConfig.httpYn,
             maxAge: 30 * 24 * 60 * 60 * 1000,
         });
-
-        // console.log("쿠키 : ", req.cookies);
 
         res.cookie("refreshToken", userToken.refreshToken, {
           httpOnly: true,
@@ -46,28 +44,24 @@ const SignIn = (req, res) => {
 const verificationUser = (req, res) => {
     try {
       const verifyAccess = tokenService.verifyToken(req.cookies.accessToken, "access");
-      console.log("쿠키 : ", req.cookies);
-      console.log("verifyAcess : " , verifyAccess );
-
-
+    
       // vaild access token
       if (verifyAccess.ok) {
         res.status(200).json({ userId: verifyAccess.userId });
+
       } else {
-        const verifyRefresh = tokenService.verifyToken(req.cookies.accessToken, "refresh");
-        // console.log("token : ", req.cookies.accessToken);
-        console.log("verifyRefresh : ", verifyRefresh);
+        const verifyRefresh = tokenService.verifyToken(req.cookies.refreshToken, "refresh");
         
         // vaild refresh token
         if (verifyRefresh.ok) {
-          res.cookie("accesstoken", makeNewToken(verifyRefresh.userId), {
+          res.cookie("accesstoken", tokenService.makeAccessToken(verifyRefresh.userId), {
             httpOnly: true,
             secure: appConfig.httpYn,
             maxAge: 30 * 24 * 60 * 60 * 1000,
           });
-
+          
+          console.log(verifyRefresh);
           res.status(200).json({ userId: verifyRefresh.userId });
-
           // expired token
         } else {
           res.status(401).json({ message: "error" });

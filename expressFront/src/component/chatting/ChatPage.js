@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import io from "socket.io-client";
+import { UserContext } from "../../provider/loginProvider";
 
 
 
@@ -15,6 +16,8 @@ const ChatPage = ()=> {
   const[serverMsg, setServerMsg] = useState("");
 
   const location = useLocation();
+  // const { isLogin, userId } = useContext(UserContext);
+ 
   // const nickName = location.state.nickName!== ? "" :"";
 
   //socket connected 

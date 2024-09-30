@@ -25,6 +25,11 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
+
+/** server routing */
+app.use("/api", loginRouter);
+
+
 /**  client routing */
 app.use(express.static(path.join(__dirname, "../expressFront/public")));
 
@@ -32,8 +37,7 @@ app.get("*",(req, res)=>{
  res.sendFile(path.join(__dirname, "../expressFront/public/index.html"));
 })
 
-/** server routing */
-app.use("/api", loginRouter);
+
 
 server.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
