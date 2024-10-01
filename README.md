@@ -26,6 +26,7 @@
 - socket.io
 
 ### 인증 절차 구조 
+- 비밀번호는 bcrypt을 사용하여 hashing
 - access token / refresh token 각 토큰을 http only & secure cookies 로 관리
 
 
