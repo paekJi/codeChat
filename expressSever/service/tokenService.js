@@ -1,7 +1,6 @@
 "use strict";
 
 const jwt = require("jsonwebtoken");
-const logger = require("../service/loginService");
 const appConfig = require("../config/config");
 
 //access token issue

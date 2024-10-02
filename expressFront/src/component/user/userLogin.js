@@ -5,13 +5,15 @@ import { AppConfig } from "../../config/config";
 import { useNavigate } from "react-router-dom";
 
 const UserLogin = () => {
-  const navigate = useNavigate();
+  const navigator = useNavigate();
 
   //login information
   const [loginInfo, setLoginInfo] = useState({
     userId: "",
     password: "",
   });
+
+  const [isLogin,  setIsLogin] = useState(false);
 
 
   /** login check process */
@@ -24,11 +26,12 @@ const UserLogin = () => {
               "Content-Type": "application/json",
             },
           });
-          navigate("/chat");
+
+          setIsLogin(true);
       } catch (error) {
         /** user info doesnt exist */
         if(error.response.status == 401){
-            alert(error.response.data.message);
+            alert("로그인 정보를 확인해주세요");
         }else{
             alert("An unknown error occurred");
         }
@@ -36,6 +39,7 @@ const UserLogin = () => {
       }
     }
   };
+
   
   /** login imformation change action */
   const loginChange = (e) => {
@@ -45,6 +49,12 @@ const UserLogin = () => {
       [name]: value,
     });
   };
+
+  useEffect(()=> {
+    if(isLogin){
+      navigator("/chatRoomList");
+    }
+  },[isLogin])
 
   return (
     <div>

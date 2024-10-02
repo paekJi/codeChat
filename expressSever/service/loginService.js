@@ -1,4 +1,5 @@
-'use strct'
+'use strict'
+
 const express = require("express");
 const bcrypt = require("bcrypt");
 
@@ -48,14 +49,12 @@ const SignIn = async (req) => {
         processResult = true;
     }catch(error){
         logger.error(error);
-        console.log(error)
     }
 
     return processResult;
 }
 
-
-
+/** hashing & salting */
 const hashedPassword = async (password) => {
   const saltRounds = 10;
   const salt = await bcrypt.genSalt(saltRounds);

@@ -63,7 +63,7 @@ const verificationUser = (req, res) => {
           res.status(200).json({ userId: verifyRefresh.userId });
           // expired token
         } else {
-          res.status(401).json({ message: "error" });
+          res.status(200).json({ userId: null });
         }
       }
     } catch (error) {  

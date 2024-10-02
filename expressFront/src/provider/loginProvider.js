@@ -15,14 +15,17 @@ const UserProvider = ({children}) => {
       try {
         const response = await axios.get(
           AppConfig.serverAddress + "/api/verifyUser", {
-            headers: {
-              "Content-Type": "application/json",
-            },
               withCredentials: true,
           }
         );
-        setUserId(response.data.userId);
-        setIsLogin(true);
+
+        if(response.data.userId){
+          setUserId(response.data.userId);
+          setIsLogin(true);
+        }else{
+          setIsLogin(false);
+        }
+
 
       } catch (error) {
         setIsLogin(false);

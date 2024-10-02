@@ -1,12 +1,31 @@
 "use strict";
 
 module.exports = (io) => {
+  const chatNameSpace = io.of("/chat");
+  
+  chatNameSpace.on("connection", (socket) => {
+
+    socket.on("cli_roomConnet", (roomInfo) => {
+      console.log("방 연결이라면서요 ")
+      console.log(roomInfo);
+    })
+
+    /*
+    socket.on("client-event", (msg) => {
+      console.log("received client message ==> " + msg);
+      io.emit("server-event", "server message");
+    });
+    */
+  })
+
+
+  /*
   io.on("connection", (socket) => {
     socket.on("client-event", (msg) => {
       console.log("received client message ==> " + msg);
       io.emit("server-event", "server message");
     });
-  });
+  }); */
 
   /*
   io.on("connection", (socket) => {

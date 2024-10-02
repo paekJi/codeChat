@@ -8,7 +8,7 @@ const socketIo = require("socket.io");
 const path = require("path");
 const app = express();
 const PORT = 3000;
-const mongo = require("./mongoDB")();
+require("./mongoDB")();
 const cookieParser = require("cookie-parser");
 
 
@@ -17,8 +17,8 @@ const io = socketIo(server);
 
 require("./socket/socket.js")(io);
 
-
 const loginRouter = require("./router/loginRoute.js");
+const chatRouter = require("./router/chatRoute.js");
 
 /** import end */
 app.use(cors());
@@ -28,6 +28,7 @@ app.use(cookieParser());
 
 /** server routing */
 app.use("/api", loginRouter);
+app.use("/api/chat",chatRouter);
 
 
 /**  client routing */
