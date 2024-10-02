@@ -2,13 +2,23 @@
 
 module.exports = (io) => {
   const chatNameSpace = io.of("/chat");
+  let room;
   
   chatNameSpace.on("connection", (socket) => {
-
+    
+    /** room join */
     socket.on("cli_roomConnet", (roomInfo) => {
-      console.log("방 연결이라면서요 ")
-      console.log(roomInfo);
+        room = roomInfo;
+        socket.join(room._id);
+        chatNameSpace.in(room._id).emit("ser_roomJoin", true);
     })
+
+    /** sending message */
+    socket.on("cli_sendMessage", (messageInfo) => {
+      messageInfo.sendDate = new Date();
+      chatNameSpace.in(room._id).emit("ser_sendMessage", messageInfo);
+    })
+
 
     /*
     socket.on("client-event", (msg) => {

@@ -48,16 +48,13 @@ const ChatRoomList = () => {
         });
     };
 
-
     /** room entry proccess */
     const enterRoom = (e) => {
         const roomId = e.target.getAttribute("data-id");
         const selectedRoom = roomList.find((room) => room._id === roomId);
-
-        /*
         navigator("/chat", {
             state : selectedRoom
-        }); */
+        });
     }
 
     return(

@@ -17,8 +17,13 @@ const io = socketIo(server);
 
 require("./socket/socket.js")(io);
 
+
+const appConfig = require("./config/config.js")
 const loginRouter = require("./router/loginRoute.js");
 const chatRouter = require("./router/chatRoute.js");
+
+
+/**chat log saver */
 
 /** import end */
 app.use(cors());

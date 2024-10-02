@@ -9,15 +9,20 @@ const ChatPage = ()=> {
   const location = useLocation();
   const userId = useContext(UserContext).userId;
 
-  const [socketConnect, setSocketConnect] = useState(false);
+  const [connection , setConnection] = useState({
+      socket : false,
+      room : false,
+  })
   const [userList, setUserList] = useState([]);
+  
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [serverMsg, setServerMsg] = useState("");
   const [roomInfo, setRoomInfo] = useState("");
 
-  //socket nameSpace connected 
   const socket = io("http://localhost:3000/chat");
+
+
   /** basic connection */
   useEffect(()=>{
     if(!location || !location.state){
@@ -26,77 +31,72 @@ const ChatPage = ()=> {
       setRoomInfo(location.state);
 
     }
-
     //socket connection verify  - not custom, basic event 
     socket.on("connect", ()=>{
-      setSocketConnect(true);
+      setConnection(prev => ({ ...prev, socket: true }));
     });
 
-    socket.emit("cli_roomConnet",roomInfo);
-
-
-    /*
-    //sev
-    socket.emit("client-event", "client message");
-    socket.on("server-event", (msg)=>{
-      setServerMsg(msg);
-
-    }) */
-  
-
+    // clean up
+    return () => {
+      socket.off("connect");
+      socket.off("chat message");
+    };
   },[])
 
 
   /**join room */
   useEffect(()=>{
+    if(roomInfo){
+      socket.emit("cli_roomConnet",roomInfo);
+      socket.on("ser_roomJoin", (roomConnection)=>{
+        if(roomConnection){
+          setConnection(prev => ({ ...prev, room: true }));
+        }
+      })
 
+    // //socket custom - send message
+    socket.on("ser_sendMessage", (messageInfo)=>{
+      setMessages(prev => [...prev, messageInfo]);
+    })
 
-
-  })  
-
-
-
-  /*
-  useEffect(() => {
-    socket.on("chat message", (msg) => {
-      setMessages((prevMessages) => [...prevMessages, msg]);
-    });
-
-    socket.on("user list", (usersList) => {
-      setUserList(usersList);
-    });
-
-
-    //listener clean up 
+    //clean up
     return () => {
-      socket.off("chat message");
-      socket.off("user list");
+      socket.off("ser_roomJoin");
+      socket.off("ser_sendMessage");
     };
-  }, []); */
-
-  const sendMessage = (e) => {
-    e.preventDefault();
-    if (message) {
-      // socket.emit("chat message", message);
-      // socket.emit("user list", nickName);
-      setMessage("");
     }
-  };
+
+  },[roomInfo]);  
+
+
+  /** send message */
+  const sendMessage = (e)=> {
+    if (message) {
+        socket.emit("cli_sendMessage", {message : message, userId : userId});
+        setMessage("");
+    }
+  } 
+
 
   return (
     <div>
-      <h1>채팅방 : {roomInfo.name}</h1>
-      <h3>{setSocketConnect ? <p>서버 연결됨</p> : <p>서버 연결이 끊어짐</p>}</h3>
+      <h1>채팅방 : {roomInfo._id}</h1>
+      <h5>유저 : {userId}</h5>
+      <h3>{connection.socket ? <p>서버 연결됨</p> : <p>서버 연결이 끊어짐</p>}</h3>
+      <h3>{connection.room ? <p>room 연결됨</p> : <p>room 연결이 끊어짐</p>}</h3>
       <h2>test :: {serverMsg} </h2>
       <ul>
         {messages.map((msg, index) => (
-          <li key={index}>{msg}</li>
+          <div key={'div'+index}>
+            <li key={'user'+index}>{msg.userId} : {msg.sendDate}</li>
+            <li key={'msg'+index}>{msg.message}</li>
+          </div>
         ))}
       </ul>
-      <form onSubmit={sendMessage}>
-        <input type="text" value={message} onChange={(e) => setMessage(e.target.value)} />
-        <button type="submit">Send</button>
-      </form>
+
+
+      <input type="text" value={message} onChange={(e) => setMessage(e.target.value)} />
+      <button onClick={sendMessage}>Send</button>
     </div>
   );
 }
