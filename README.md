@@ -15,7 +15,7 @@
 ### 프로젝트 기본세팅  
 #### SERVER
 - node.js / express
-- mongoDB
+- mongoDB  + sqllite
 - morgan / winston logging 
 
 #### CLIENT 
@@ -28,7 +28,8 @@
 ### 인증 절차 구조 
 - 비밀번호는 bcrypt을 사용하여 hashing
 - access token / refresh token 각 토큰을 http only & secure cookies 로 관리
+  
 
 
 ### 프로젝트에서 고민하는점 
-
+- login 인증 확인 로직을 server router에 넣을건지 ... useContext를 세팅하는 provider에 넣을건지 ...
