@@ -15,7 +15,7 @@ npm install axios
 npm i @socket.io/admin-ui
 npm install redux react-redux
 @reduxjs/toolkit
-npm install sqlite3
+ npm install better-sqlite3
 
 
 실행 

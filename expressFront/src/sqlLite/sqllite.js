@@ -1,33 +1,69 @@
-const sqlite3 = require("sqlite3").verbose();
+const Database = require("better-sqlite3");
 
+let db;
 
+/** connect to SQLite */
+const connectToDb = (dbLocation) => {
+  db = new Database(dbLocation, { verbose: console.log });
 
-let sqllite;
+  /** table / index create */
+  db.exec(`
+    CREATE TABLE IF NOT EXISTS messages (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      roomId TEXT NOT NULL,
+      sender TEXT NOT NULL,
+      content TEXT NOT NULL,
+      type TEXT,
+      timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
+    );
+    
+    CREATE INDEX IF NOT EXISTS idx_roomIdx ON messages(roomId ASC);
+  `);
+  console.log("Connected to the SQLite database.");
+};
 
-/**connect to sqllite */
-const connectToDatabase = (dbLocation) => {
-  db = new sqlite3.Database(dbLocation, (err) => {
-    if (err) {
-      console.error(err.message);
-    } else {
-      console.log("Connected to the SQLite database.");
-    }
-  });
-
-  /** table / index create  */
-  db.serialize(() => {
-    db.run(`CREATE TABLE IF NOT EXISTS messages (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        roomId TEXT NOT NULL,
-        sender TEXT NOT NULL,
-        content TEXT NOT NULL,
-        type TEXT,
-        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
-    )`);
-
-    db.run(`CREATE INDEX IF NOT EXISTS idx_roomIdx ON messages(roomId ASC)`);
-  });
+/** disconnect to SQLite */
+const disconnectToDB = () => {
+  db.close();
+  console.log("SQLite is disconnected");
 };
 
 
+/**insert message */
+const insertMessage = (messageInfo) => {
+  const sql = `INSERT INTO messages (roomId, sender, content, type) 
+                VALUES (?, ?, ?, ?)`;
+  const param = [messageInfo.roomId, messageInfo.sender, messageInfo.content, messageInfo.type];
 
+  try {
+    db.prepare(sql).run(param);
+    return true;
+  } catch (err) {
+    console.error("Error inserting message:", err);
+    return false;
+  }
+};
+
+/** select room message */
+const selectMessage = (roomId) => {
+  const sql = `SELECT roomId, sender, content, type, timestamp 
+               FROM messages 
+               WHERE roomId = ?
+               ORDER BY timestamp DESC`;
+  const param = [roomId];
+
+  try {
+    const rows = db.prepare(sql).all(param);
+    return rows;
+  } catch (err) {
+    console.error("Error selecting messages:", err);
+    return [];
+  }
+};
+
+module.exports = {
+  connectToDb,
+  disconnectToDB,
+  insertMessage,
+  selectMessage,
+};

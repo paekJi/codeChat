@@ -8,10 +8,12 @@ import UserSignIn from "./component/user/userSignIn";
 import PrivateRoute from "./router/privateRoute";
 import UserProvider from "./provider/loginProvider";
 import ChatRoomList from "./component/chatting/chatRoomList";
+
+
 function App() {
   return (
     <div>
-      <UserProvider>
+      {/* <UserProvider> */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route element={<PrivateRoute />}>
@@ -23,7 +25,7 @@ function App() {
           <Route path="/signIn" element={<UserSignIn />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
-      </UserProvider>
+      {/* </UserProvider> */}
     </div>
   );
 }

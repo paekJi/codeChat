@@ -19,6 +19,7 @@ const loginChk = async (req) => {
                 const userToken = {
                     accessToken : tokenService.makeAccessToken(userId),
                     refreshToken : tokenService.makeRefreshToken(userId),
+                    userInfo : user,
                 }
                 await User.updateOne({ userId: userId }, { refreshToken: userToken.refreshToken, tokenUpdate: new Date() });
                 logger.info(`user login : ${user}`);

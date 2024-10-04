@@ -8,6 +8,7 @@ function createWindow() {
     height: 600,
     webPreferences: {
       nodeIntegration: true,
+      contextIsolation: false, 
     },
   });
   win.loadURL("http://localhost:3000");
@@ -15,6 +16,11 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
-  sqlliteDb.connectToDatabase("./path/to/database.db");
+  sqlliteDb.connectToDb("./database.db");
   createWindow();
+});
+
+
+app.on("will-quit",(e)=>{
+    sqlliteDb.disconnectToDB();
 });

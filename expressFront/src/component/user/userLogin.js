@@ -1,11 +1,12 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import axios from "axios";
-import { AppConfig } from "../../config/config";
 import { useNavigate } from "react-router-dom";
+import { userAction } from "../../redux/action/userAction";
+import { useDispatch } from "react-redux";
 
 const UserLogin = () => {
   const navigator = useNavigate();
+  const dispatch = useDispatch();
 
   //login information
   const [loginInfo, setLoginInfo] = useState({
@@ -15,19 +16,13 @@ const UserLogin = () => {
 
   const [isLogin,  setIsLogin] = useState(false);
 
-
   /** login check process */
   const loginProcess = async (e) => {
     e.preventDefault();
     if (loginInfo.userId && loginInfo.password) {
       try {
-          const response = await axios.post(AppConfig.serverAddress + "/api/login", loginInfo, {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
-
-          setIsLogin(true);
+        dispatch(userAction.setUser(loginInfo));
+        setIsLogin(true);
       } catch (error) {
         /** user info doesnt exist */
         if(error.response.status == 401){

@@ -15,14 +15,13 @@ const server = http.createServer(app);
 const io = socketIo(server);
 
 
-const appConfig = require("./config/config.js")
+// const appConfig = require("./config/config.js")
 const loginRouter = require("./router/loginRoute.js");
 const chatRouter = require("./router/chatRoute.js");
 
 /** database / socket connect  */
 require("./socket/socket.js")(io);
 require("./db/mongoDB")();
-require("./db/sqllite.js")(appConfig.sqlliteLocation);
 
 /** import end */
 app.use(cors());

@@ -1,6 +1,4 @@
-// userSlice.js
 import { createSlice } from "@reduxjs/toolkit";
-
 
 const initialState = {
   userInfo: null,
@@ -12,15 +10,14 @@ const userSlice = createSlice({
   reducers: {
     setUser: (state, action) => {
       state.userInfo = action.payload; 
+      console.log(state.userInfo);
     },
+    
     clearUser: (state) => {
       state.userInfo = null; 
     },
   },
 });
 
-// 액션 생성자 내보내기
-export const { setUser, clearUser } = userSlice.actions;
-
-// 리듀서 내보내기
+export const userReducer = userSlice.actions;
 export default userSlice.reducer;

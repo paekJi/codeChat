@@ -1,12 +1,12 @@
 import axios from "axios";
-import React, { useContext } from "react";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AppConfig } from "../../config/config";
-import { UserContext } from "../../provider/loginProvider";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const ChatRoomList = () => {
-    const userId = useContext(UserContext).userId;
+
+    const userId = useSelector((state)=> state.user.userId);
     const navigator = useNavigate();
 
     const [roomList, setRoomList] = useState([]);

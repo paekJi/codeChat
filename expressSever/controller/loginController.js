@@ -23,8 +23,8 @@ const loginChk = async (req, res) => {
           secure: appConfig.httpYn,
           maxAge: 30 * 24 * 60 * 60 * 1000,
         });
-
-    res.status(200).json({message: "ok" });
+        
+    res.status(200).json({message: userToken.userInfo });
   } else {
     res.status(401).json({message : "error"});
   }
