@@ -8,7 +8,6 @@ npm install jsonwebtoken  => 토큰 검증
 npm install dotenv	 => 토ㅓ큰검증 
 npm install winston winston-daily-rotate-file   morgan
 npm install cookie-parser
-npm install sqlite3
 
 (프론트)
 npm install electron 
@@ -16,6 +15,7 @@ npm install axios
 npm i @socket.io/admin-ui
 npm install redux react-redux
 @reduxjs/toolkit
+npm install sqlite3
 
 
 실행 

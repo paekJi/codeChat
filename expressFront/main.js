@@ -1,5 +1,6 @@
 const { app, BrowserWindow } = require("electron");
 const path = require("path");
+const sqlliteDb = require("./src/sqlLite/sqllite"); 
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -13,4 +14,7 @@ function createWindow() {
   win.webContents.openDevTools();
 }
 
-app.whenReady().then(createWindow);
+app.whenReady().then(() => {
+  sqlliteDb.connectToDatabase("./path/to/database.db");
+  createWindow();
+});
