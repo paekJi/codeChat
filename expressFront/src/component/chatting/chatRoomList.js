@@ -6,14 +6,18 @@ import { useSelector } from "react-redux";
 
 const ChatRoomList = () => {
 
-    const userId = useSelector((state)=> state.user.userId);
+    const userInfo = useSelector((state) => state.user.userInfo);
+  
+    useEffect(() => {
+      console.log("User Info updated: ", userInfo);
+    }, [userInfo]); // userInfo가 변할 때마다 로그 출력
+
     const navigator = useNavigate();
 
     const [roomList, setRoomList] = useState([]);
     const [chatInfo, setChatInfo] = useState({
         name : "",
         comment : "",
-        host : userId,
         constraint : "",
         password : ""
     });
@@ -28,6 +32,7 @@ const ChatRoomList = () => {
         }
         getRoomList();
     },[])
+
     
     /** submit new Room */
     const addNewRoom =  async (e) => {

@@ -34,17 +34,16 @@ const loginChk = async (req) => {
     }
 }
 
-
 /** user sign in */
 const SignIn = async (req) => {
     let processResult = false;
     try{
-        const { userId, password } = req.body;
+        const { userId, userName, password } = req.body;
         //make hash
         const hashedpass = await hashedPassword(password);
 
         // save user
-        const newUser = new User({ userId, password: hashedpass, createDate: new Date() });
+        const newUser = new User({ userId : userId, userName : userName, password: hashedpass, createDate: new Date() });
         await newUser.save();
         logger.info("user sign in : ", newUser );
         processResult = true;
@@ -55,12 +54,15 @@ const SignIn = async (req) => {
     return processResult;
 }
 
+
+
 /** hashing & salting */
 const hashedPassword = async (password) => {
   const saltRounds = 10;
   const salt = await bcrypt.genSalt(saltRounds);
   return await bcrypt.hash(password, salt);
 };
+
 
 
 module.exports = {

@@ -6,20 +6,20 @@ const UserSignIn = () => {
   //signin information
   const [signInInfo, setSignInInfo] = useState({
     userId: "",
+    userName : "",
     password: "",
   });
 
   /** signIn process */
   const signInProcess = async (e) => {
     e.preventDefault();
-    if (signInInfo.userId && signInInfo.password) {
+    if (signInInfo.userId && signInInfo.userName && signInInfo.password) {
       try {
         const response = await axios.post(AppConfig.serverAddress + "/api/signIn", signInInfo, {
           headers: {
             "Content-Type": "application/json",
           },
         });
-        console.log(response);
       } catch (error) {
 
          alert("An unknown error occurred");
@@ -42,7 +42,8 @@ const UserSignIn = () => {
     <div>
       <p>회원가입 페이지</p>
       <form onSubmit={signInProcess}>
-        <input type="text" name="userId" placeholder="name" onChange={signInChange} />
+        <input type="text" name="userId" placeholder="id" onChange={signInChange} />
+        <input type="text" name="userName" placeholder="name" onChange={signInChange} />
         <input type="password" name="password" onChange={signInChange} />
         <button type="submit">회원가입 하기</button>
       </form>

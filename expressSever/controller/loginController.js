@@ -24,6 +24,10 @@ const loginChk = async (req, res) => {
           maxAge: 30 * 24 * 60 * 60 * 1000,
         });
         
+    req.session.userInfo = userToken.userInfo;
+
+   
+
     res.status(200).json({message: userToken.userInfo });
   } else {
     res.status(401).json({message : "error"});
@@ -39,6 +43,20 @@ const SignIn = (req, res) => {
     }
 }
 
+
+/** session userInfo */
+const userSession = (req, res) => {
+  console.log("세션 ",req.session.userInfo );
+  try {
+    if (req.session.userInfo) {
+      res.status(200).json({userInfo : req.session.userInfo}); 
+    }else{
+      res.status(403).json({message : "Unauthenticated"});
+    }
+  } catch (error) {
+    res.status(401).json({message : error});
+  }
+}
 
 /** verify user token  */
 const verificationUser = (req, res) => {
@@ -78,4 +96,5 @@ module.exports = {
   loginChk,
   SignIn,
   verificationUser,
+  userSession
 };

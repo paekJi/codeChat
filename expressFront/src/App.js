@@ -6,7 +6,6 @@ import NotFoundPage from "./NotFountPage";
 import UserLogin from "./component/user/userLogin";
 import UserSignIn from "./component/user/userSignIn";
 import PrivateRoute from "./router/privateRoute";
-import UserProvider from "./provider/loginProvider";
 import ChatRoomList from "./component/chatting/chatRoomList";
 
 

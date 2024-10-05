@@ -1,4 +1,3 @@
-// userSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
@@ -12,13 +11,12 @@ const messageSlice = createSlice({
     setMessages: (state, action) => {
       state.messages = action.payload; 
     },
-
     clearMessages: (state) => {
       state.messages = null; 
     },
   },
 });
 
-export const messageReducer = messageSlice.actions;
+export const { setMessages, clearMessages } = messageSlice.actions; 
 
 export default messageSlice.reducer;
