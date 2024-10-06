@@ -17,7 +17,7 @@ npm i @socket.io/admin-ui
 npm install redux react-redux
 @reduxjs/toolkit
  npm install better-sqlite3
-
+npm install -g node-gyp
 
 실행 
 
