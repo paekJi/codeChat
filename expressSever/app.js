@@ -25,8 +25,6 @@ const chatRouter = require("./router/chatRoute.js");
 require("./socket/socket.js")(io);
 require("./db/mongoDB")();
 
-console.log(appConfig.httpYn);
-
 /** import end */
 app.use(cors());
 app.use(express.json());

@@ -1,17 +1,11 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { AppConfig } from "../../config/config";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { UserContext } from "../../provider/loginProvider";
 
 const ChatRoomList = () => {
-
-    const userInfo = useSelector((state) => state.user.userInfo);
-  
-    useEffect(() => {
-      console.log("User Info updated: ", userInfo);
-    }, [userInfo]); // userInfo가 변할 때마다 로그 출력
-
+    
     const navigator = useNavigate();
 
     const [roomList, setRoomList] = useState([]);

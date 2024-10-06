@@ -16,6 +16,7 @@ module.exports = (io) => {
     /** sending message */
     socket.on("cli_sendMessage", (messageInfo) => {
       messageInfo.sendDate = new Date();
+      console.log(messageInfo);
       chatNameSpace.in(room._id).emit("ser_sendMessage", messageInfo);
     })
 

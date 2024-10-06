@@ -28,7 +28,7 @@ const loginChk = async (req, res) => {
 
    
 
-    res.status(200).json({message: userToken.userInfo });
+    res.status(200).json({userInfo: userToken.userInfo });
   } else {
     res.status(401).json({message : "error"});
   }
@@ -46,12 +46,11 @@ const SignIn = (req, res) => {
 
 /** session userInfo */
 const userSession = (req, res) => {
-  console.log("세션 ",req.session.userInfo );
   try {
     if (req.session.userInfo) {
       res.status(200).json({userInfo : req.session.userInfo}); 
     }else{
-      res.status(403).json({message : "Unauthenticated"});
+      res.status(200).json({userInfo : null});
     }
   } catch (error) {
     res.status(401).json({message : error});

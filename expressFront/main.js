@@ -1,6 +1,7 @@
 const { app, BrowserWindow } = require("electron");
 const path = require("path");
-const sqlliteDb = require("./src/sqlLite/sqllite"); 
+const sqlliteDb = require("./src/electron/sqlLite/sqllite"); 
+const ipcHandlers = require("./src/electron/Ipc/ipcMainHandler");
 
 function createWindow() {
   const win = new BrowserWindow({
@@ -8,6 +9,7 @@ function createWindow() {
     height: 600,
     webPreferences: {
       nodeIntegration: true,
+      enableRemoteModule: false,
       contextIsolation: false, 
     },
   });
@@ -18,6 +20,7 @@ function createWindow() {
 app.whenReady().then(() => {
   sqlliteDb.connectToDb("./database.db");
   createWindow();
+  ipcHandlers();
 });
 
 

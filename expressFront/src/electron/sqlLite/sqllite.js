@@ -5,13 +5,14 @@ let db;
 /** connect to SQLite */
 const connectToDb = (dbLocation) => {
   db = new Database(dbLocation, { verbose: console.log });
-
+  
   /** table / index create */
   db.exec(`
     CREATE TABLE IF NOT EXISTS messages (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       roomId TEXT NOT NULL,
-      sender TEXT NOT NULL,
+      userId TEXT NOT NULL,
+      userName TEXT NOT NULL,
       content TEXT NOT NULL,
       type TEXT,
       timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
@@ -31,9 +32,9 @@ const disconnectToDB = () => {
 
 /**insert message */
 const insertMessage = (messageInfo) => {
-  const sql = `INSERT INTO messages (roomId, sender, content, type) 
-                VALUES (?, ?, ?, ?)`;
-  const param = [messageInfo.roomId, messageInfo.sender, messageInfo.content, messageInfo.type];
+  const sql = `INSERT INTO messages (roomId, userId, userName, content, type) 
+                VALUES (?, ?, ?, ?, ?)`;
+  const param = [messageInfo.roomId, messageInfo.userId, messageInfo.userName, messageInfo.content, ""];
 
   try {
     db.prepare(sql).run(param);
@@ -46,10 +47,10 @@ const insertMessage = (messageInfo) => {
 
 /** select room message */
 const selectMessage = (roomId) => {
-  const sql = `SELECT roomId, sender, content, type, timestamp 
+  const sql = `SELECT roomId, userId, userName, content, type, timestamp 
                FROM messages 
                WHERE roomId = ?
-               ORDER BY timestamp DESC`;
+               ORDER BY timestamp ASC`;
   const param = [roomId];
 
   try {
