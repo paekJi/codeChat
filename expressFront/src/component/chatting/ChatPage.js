@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useContext } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import io from "socket.io-client";
+const { ipcRenderer } = window.require("electron");
+
 import { UserContext } from "../../provider/loginProvider";
 import { AppConfig } from "../../config/config";
-const { ipcRenderer } = window.require("electron");
+import style from "../../static/style.module.css"
 
 const ChatPage = ()=> {
   const navigator = useNavigate();
@@ -134,28 +136,34 @@ const ChatPage = ()=> {
       <h5>유저 : {userInfo.userName}</h5>
       <h3>{connection.socket ? <p>서버 연결됨</p> : <p>서버 연결이 끊어짐</p>}</h3>
       <h3>{connection.room ? <p>room 연결됨</p> : <p>room 연결이 끊어짐</p>}</h3>
+      <div className="roomInfo"></div>
+      <div className="messages">
 
-      <ul>
-      {prevMessages.map((msg, index) => (
-          <div key={'prev_div'+index}>
-            <li key={'prev_user'+index}>{msg.userName} : {msg.timestamp}</li>
-            <li key={'prev_msg'+index}>{msg.content}</li>
-          </div>
-        ))}
-      </ul>
+        {prevMessages.map((msg, index) => (
+            <>
+             <div key={'prev_message' + index}  
+                className={`${style.message_box} ${msg.userId === userInfo.userId ? style.self_msg : style.other_msg}`}>
+              <div key={'prev_time'+index} className={style.msg_info}><p>{msg.userName} : {msg.timestamp}</p></div>
+                <div key={'prev_msg'+index} className={style.msg_content}>{msg.content}</div>
+              </div>
+            </>
+          ))}
 
-      <ul>
-        {messages.map((msg, index) => (
-          <div key={'div'+index}>
-            <li key={'user'+index}>{msg.userInfo.userName} : {msg.sendDate}</li>
-            <li key={'msg'+index}>{msg.content}</li>
-          </div>
-        ))}
-      </ul>
+          {messages.map((msg, index) => (
+              <>
+                <div key={'div'+index} 
+                className={`style.message_box ${msg.userInfo.userName === userInfo.userId ? style.self_msg : style.other_msg}`}>
+                  <div key={'user'+index} className={style.msg_info}><p>{msg.sendDate}</p></div>
+                  <div key={'msg'+index} className={style.msg_content}>{msg.content}</div>
+                </div>
+              </>
+            ))}
+        
 
 
-      <input type="text" value={message} onChange={(e) => setMessage(e.target.value)} />
-      <button onClick={sendMessage}>Send</button>
+        <input type="text" value={message} onChange={(e) => setMessage(e.target.value)} />
+        <button onClick={sendMessage}>Send</button>
+      </div>
     </div>
   );
 }
