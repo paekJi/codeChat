@@ -140,23 +140,19 @@ const ChatPage = ()=> {
       <div className="messages">
 
         {prevMessages.map((msg, index) => (
-            <>
              <div key={'prev_message' + index}  
                 className={`${style.message_box} ${msg.userId === userInfo.userId ? style.self_msg : style.other_msg}`}>
-              <div key={'prev_time'+index} className={style.msg_info}><p>{msg.userName} : {msg.timestamp}</p></div>
+                <div key={'prev_time'+index} className={style.msg_info}><p>{msg.userName} : {msg.timestamp}</p></div>
                 <div key={'prev_msg'+index} className={style.msg_content}>{msg.content}</div>
               </div>
-            </>
           ))}
 
           {messages.map((msg, index) => (
-              <>
                 <div key={'div'+index} 
-                className={`style.message_box ${msg.userInfo.userName === userInfo.userId ? style.self_msg : style.other_msg}`}>
+                   className={`style.message_box ${msg.userInfo.userName === userInfo.userId ? style.self_msg : style.other_msg}`}>
                   <div key={'user'+index} className={style.msg_info}><p>{msg.sendDate}</p></div>
                   <div key={'msg'+index} className={style.msg_content}>{msg.content}</div>
                 </div>
-              </>
             ))}
         
 
