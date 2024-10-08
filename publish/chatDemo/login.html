@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+       *, *::before, *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+       }
+       
+       .flex-box{
+        border: solid 1px black;
+        padding: 20px;
+        width: 100%;
+        text-align: center;
+        justify-items: center;
+        }
+        
+        .main-logo-black{
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="flex-box">
+        <img class="main-logo-black" src="./img//black_theme_logo.png"/>
+        <div>
+            <input type="text" />
+            <input type="password"/>
+        </div>
+
+        <div>
+            <input type=button value="로그인"/>
+            <input type=button value="회원가입"/>
+        </div>
+    </div>
+</body>
+</html>
