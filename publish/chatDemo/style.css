@@ -1,0 +1,88 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 14pt;
+   }
+
+   .flex-box{
+    display: grid; align-content: center;
+    padding: 20px;
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    }
+    
+    .main-logo-black{
+        width: 350px;
+        margin-bottom: 60px;
+        border-radius: 10pt;
+        box-shadow: -5px -5px 30px 5px red, 5px 5px 30px 5px blue;
+    }
+
+    .block-input-container{
+        width: 500px;
+        margin: auto;
+    }
+
+    .input-label{
+        text-align: left;
+        font-size: 12pt;
+        margin-bottom: 5px;
+        font-weight: 600;
+        color: #242424;
+    }
+
+    .block-input{
+        display: block;
+        width: 100%;
+        height: 60px;
+        margin-bottom: 20px;
+        padding: 10px;
+        border-radius: 5px;
+        border : 1.5px solid #aeaeae;
+    }
+
+    .main-btn{
+        display: inline-block;
+        width: 200px;
+        height: 50px;
+        margin: 20px 15px;
+        background-color: black;
+        color: white;
+        border-radius: 5px;
+        border: none;
+    }
+
+
+    /** navigator*/
+    .navigator{width: 250px;
+        height: 100vh;
+        background-color:#282C34;
+        position: absolute;}
+    
+    .app-content {padding-left: 250px;}
+
+    .navi-logo{
+        height: 100px;
+        background-color: black;
+        background-image: url("./img/black_theme_logo.png");
+        background-size: contain; 
+        background-repeat: no-repeat;
+        background-position: center;
+    }
+
+    .setting-navi {
+        width: 90%;
+        height: 60px;
+        background-color: #555B68;
+        margin: 20px auto;
+        border-radius: 20pt;
+    }
+
+    
+    /**room List */
+    .roomList-navi{
+        height: 100px;
+        border: 1px solid black;
+    }
