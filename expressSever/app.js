@@ -14,11 +14,11 @@ const session = require('express-session');
 const server = http.createServer(app);
 const io = socketIo(server);
 
-
 const appConfig = require("./config/config.js")
+
 const loginRouter = require("./router/loginRoute.js");
 const chatRouter = require("./router/chatRoute.js");
-
+const friendRouter = require("./router/friendRoute.js");
 
 
 /** database / socket connect  */
@@ -40,6 +40,7 @@ app.use( session({
 /** server routing */
 app.use("/api", loginRouter);
 app.use("/api/chat",chatRouter);
+app.use("/api/friend", friendRouter);
 
 
 /**  client routing */

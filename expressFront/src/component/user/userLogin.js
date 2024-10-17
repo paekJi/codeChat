@@ -1,9 +1,11 @@
 import React, { useEffect,useContext } from "react";
 import { useState } from "react";
 import axios from "axios";
+
 import { AppConfig } from "../../config/config";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../provider/loginProvider";
+import "../../static/style.css";
 
 
 const UserLogin = () => {
@@ -58,12 +60,20 @@ const UserLogin = () => {
   };
 
   return (
-    <div>
-      <p>Login Page</p>
-        <input type="text" name="userId" placeholder="enter your name" onChange={loginChange} />
-        <input type="password" name="password" onChange={loginChange} />
-        <button onClick={loginProcess} >login</button>
-    </div>
+      <div className="flex-box">
+          <div>
+              <img className="main-logo-black" src={AppConfig.serverAddress + "/img/black_theme_logo.png"}/>
+          </div>
+          <div className="block-input-container">
+              <input className="block-input" name="userId" onChange={loginChange}  type="text" placeholder="Please enter your id" />
+              <input className="block-input" name="password" onChange={loginChange} type="password" placeholder="Please enter your password"/>
+          </div>
+
+          <div>
+              <input onClick={loginProcess} className="main-btn black-letter" type="button" value="Login"/>
+              <input className="main-btn white-letter" type="button" value="Sign In"/>
+          </div>
+      </div>
   );
 };
 

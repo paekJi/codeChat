@@ -11,7 +11,8 @@ const logger = require("../config/winston").logger;
 const loginChk = async (req) => {
     try {
         const { userId, password } = req.body;
-        const user = await User.findOne({ userId });
+        const user = await User.findOne({ userId })
+                               .select("_id userId userName profileImg");
         if (user) {
             const isMatch = await bcrypt.compare(password, user.password);
             if (isMatch) { 
@@ -43,7 +44,7 @@ const SignIn = async (req) => {
         const hashedpass = await hashedPassword(password);
 
         // save user
-        const newUser = new User({ userId : userId, userName : userName, password: hashedpass, createDate: new Date() });
+        const newUser = new User({ userId : userId, userName : userName, password: hashedpass });
         await newUser.save();
         logger.info("user sign in : ", newUser );
         processResult = true;

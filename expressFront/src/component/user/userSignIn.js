@@ -1,6 +1,9 @@
 import axios from "axios";
 import React, { useState } from "react";
+
 import { AppConfig } from "../../config/config";
+import "../../static/style.css";
+
 
 const UserSignIn = () => {
   //signin information
@@ -12,7 +15,6 @@ const UserSignIn = () => {
 
   /** signIn process */
   const signInProcess = async (e) => {
-    e.preventDefault();
     if (signInInfo.userId && signInInfo.userName && signInInfo.password) {
       try {
         const response = await axios.post(AppConfig.serverAddress + "/api/signIn", signInInfo, {
@@ -39,15 +41,26 @@ const UserSignIn = () => {
   };
 
   return (
-    <div>
-      <p>회원가입 페이지</p>
-      <form onSubmit={signInProcess}>
-        <input type="text" name="userId" placeholder="id" onChange={signInChange} />
-        <input type="text" name="userName" placeholder="name" onChange={signInChange} />
-        <input type="password" name="password" onChange={signInChange} />
-        <button type="submit">회원가입 하기</button>
-      </form>
-    </div>
+        <div className="flex-box">
+            <div>
+              <img className="main-logo-black" src={AppConfig.serverAddress + "/img/black_theme_logo.png"}/>
+            </div>
+            <div className="block-input-container">
+                <p className="input-label">ID</p>
+                <input  name="userId" onChange={signInChange} className="block-input"  type="text" placeholder="Please enter your id" />
+                <p className="input-label">USERNAME</p>
+                <input name="userName" onChange={signInChange} className="block-input"  type="text" placeholder="Please enter your NAME" />
+                <p className="input-label">PASSWORD</p>
+                <input className="block-input" type="password" placeholder="Please enter your password"/>
+                <p className="input-label">CONFIRM PASSWOD</p>
+                <input className="block-input" name="password" onChange={signInChange} type="password" placeholder="Please enter your password"/>
+            </div>
+
+            <div>
+                <input onClick={signInProcess} className="main-btn black-letter" type="button" value="BACK"/>
+                <input className="main-btn white-letter" type="button" value="SIGN IN"/>
+            </div>
+        </div>
   );
 };
 

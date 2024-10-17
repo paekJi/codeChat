@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState, useContext } from "react";
 import { AppConfig } from "../../config/config";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../provider/loginProvider";
+import "../../static/style.css";
 
 const ChatRoomList = () => {
     
@@ -57,7 +57,7 @@ const ChatRoomList = () => {
     }
 
     return(
-        <div>
+        <div className="app-content">
             <h3>채팅방 목록</h3>
                 <ul>
                     {roomList.map((room, idx) => (

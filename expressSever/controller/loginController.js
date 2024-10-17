@@ -24,9 +24,8 @@ const loginChk = async (req, res) => {
           maxAge: 30 * 24 * 60 * 60 * 1000,
         });
         
-    req.session.userInfo = userToken.userInfo;
-
-   
+      //save session
+      req.session.userInfo = userToken.userInfo;
 
     res.status(200).json({userInfo: userToken.userInfo });
   } else {

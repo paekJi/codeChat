@@ -7,12 +7,7 @@ const roomSchema = mongoose.Schema({
     host : String,
     constraint : Boolean,
     password : String,
-    users : [ 
-        {
-            userId : String, 
-            joinDate : Date
-        }
-    ], 
+    users : [{ userId : String, joinDate : Date }], 
     createDate : Date
 });
 

@@ -5,7 +5,7 @@ const { ipcRenderer } = window.require("electron");
 
 import { UserContext } from "../../provider/loginProvider";
 import { AppConfig } from "../../config/config";
-import style from "../../static/style.module.css"
+import style from "../../static/style.css"
 
 const ChatPage = ()=> {
   const navigator = useNavigate();
@@ -130,7 +130,8 @@ const ChatPage = ()=> {
   },[sqlMessage])
 
 
-  return (
+  // return (
+    /*
     <div>
       <h1>채팅방 : {roomInfo._id}</h1>
       <h5>유저 : {userInfo.userName}</h5>
@@ -160,8 +161,8 @@ const ChatPage = ()=> {
         <input type="text" value={message} onChange={(e) => setMessage(e.target.value)} />
         <button onClick={sendMessage}>Send</button>
       </div>
-    </div>
-  );
+    </div> */
+  // );
 }
 
 export default ChatPage;

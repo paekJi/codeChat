@@ -1,0 +1,1 @@
+{"version":3,"file":"static/css/main.2c204bb2.css","mappings":"AAAA,0BAAa,qBAAuB,CAAC,UAAY,CACjD,wBAAW,UAAY,CACvB,uBAAW,WAAa","sources":["static/style.module.css"],"sourcesContent":[".message_box{border: 1px solid black;clear: both;}\r\n.other_msg{float: left;}\r\n.self_msg{ float: right;}"],"names":[],"sourceRoot":""}

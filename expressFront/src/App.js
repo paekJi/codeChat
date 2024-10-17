@@ -8,6 +8,8 @@ import UserSignIn from "./component/user/userSignIn";
 import PrivateRoute from "./router/privateRoute";
 import ChatRoomList from "./component/chatting/chatRoomList";
 import UserProvider from "./provider/loginProvider";
+import LeftNavi from "./component/common/leftNavi";
+import FriendList from "./component/user/friendList";
 
 
 function App() {
@@ -17,9 +19,12 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route element={<PrivateRoute />}>
-            {/** chat */}
-            <Route path="/chat" element={<ChatPage />} />
-            <Route path="/chatRoomList" element={<ChatRoomList/>}/>
+            <Route element={<LeftNavi/>}>
+              {/** chat */}
+              <Route path="/chat" element={<ChatPage />} />
+              <Route path="/chatRoomList" element={<ChatRoomList/>}/>
+              <Route path="/friend/manage" element={<FriendList/>}/>
+            </Route>
           </Route>
           <Route path="/login" element={<UserLogin />} />
           <Route path="/signIn" element={<UserSignIn />} />
