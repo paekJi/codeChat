@@ -1,7 +1,7 @@
 "use strict";
 
+const friendRequest = require("../model/friendRequest");
 const User = require("../model/user");
-
 
 /** get friend list  */
 const friendList = async (req) => {
@@ -34,14 +34,18 @@ const searchUser = async (req) => {
 }
 
 /** request friend */
-const requestFriend = async (req) => {
+const requestFriend = async (req, userId) => {
     try {
-        // const 
+        const requestTargetId = req.body.userKey;
+        new friendRequest({requester : userId, receiver : requestTargetId });
+
+        return true;
     } catch (error) {
-        
+        return false;
     }
 }
 
+/** approve request  */
 const approveFriend = () => {
 
 

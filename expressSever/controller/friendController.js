@@ -20,8 +20,6 @@ const friendList = async (req, res) => {
 const searchUser = async (req, res) => {
     try {
         const searchResult =  await friendService.searchUser(req);
-
-        console.log(searchResult);
         res.status(200).json({searchResult : searchResult});
     } catch (error) {
         res.status(401).json({message : "error"});
@@ -30,13 +28,25 @@ const searchUser = async (req, res) => {
 
 }
 
-
-const requestFriend = () => {
-
+/** request friend */
+const requestFriend = async (req, res) => {
+    try {
+        const userSession = req.session.userInfo;
+        const requestRes =  await friendService.requestFriend(req, userSession._id);
+        
+        res.status(200).json({message :  requestRes});
+    } catch (error) {
+        res.status(401).json({message : "error"});
+    }
 }
 
+/** approve request  */
 const approveFriend = () => {
-
+    try {
+        
+    } catch (error) {
+        
+    }
 
 }
 

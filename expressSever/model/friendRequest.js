@@ -6,7 +6,7 @@ const friendRequestSchema = mongoose.Schema({
     requester : {type : String, required: true},
     receiver: {type : String, required: true},
     state : {type : String, default : "N"},
-    regdate :{type : Date , default : new Date()}
+    regdate : {type : Date , default : new Date()}
 });
 
 const friendRequest = mongoose.model("friend_request", friendRequestSchema);

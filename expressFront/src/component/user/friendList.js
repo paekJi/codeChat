@@ -44,12 +44,8 @@ const FriendList = ()=>{
 
     const requestFriend = async (e) => {
         const userKey = e.target.dataset.id;
-        const response = await axios.post(AppConfig.serverAddress + "/api/friend/requestFriend",{userKey : userKey},{
-            
-        })
+        const response = await axios.post(AppConfig.serverAddress + "/api/friend/requestFriend",{userKey : userKey},{})
         
-
-
     }
 
 
@@ -65,6 +61,11 @@ const FriendList = ()=>{
             )}
             <input type="button" onClick={openModal} value="친구 검색하기"/>
     
+
+            <h3>친구 요청 목록 </h3>
+            
+
+
         {/**나중에.. */}
             <div>
                 <p>아이디를 통해서 검색합니다.</p>
