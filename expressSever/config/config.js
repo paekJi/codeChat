@@ -8,4 +8,3 @@ module.exports = {
   refreshKey: process.env.REFRESH_TOKEN_KEY,
   httpYn: process.env.HTTP_YN,
 };
-

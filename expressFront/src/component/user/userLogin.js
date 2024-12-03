@@ -38,7 +38,6 @@ const UserLogin = () => {
 
 
       } catch (error) {
-        console.log(error);
         /** user info doesnt exist */
         if(error.response.status == 401){
             alert("로그인 정보를 확인해주세요");
@@ -59,6 +58,11 @@ const UserLogin = () => {
     });
   };
 
+  /**move to sign up page */
+  const signUpPage =  () => {
+    navigate("/signIn")
+  }
+
   return (
       <div className="flex-box">
           <div>
@@ -71,7 +75,7 @@ const UserLogin = () => {
 
           <div>
               <input onClick={loginProcess} className="main-btn black-letter" type="button" value="Login"/>
-              <input className="main-btn white-letter" type="button" value="Sign In"/>
+              <input onClick={signUpPage} className="main-btn white-letter" type="button" value="Sign In"/>
           </div>
       </div>
   );

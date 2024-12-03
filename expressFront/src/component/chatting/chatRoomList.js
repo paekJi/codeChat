@@ -31,7 +31,7 @@ const ChatRoomList = () => {
     /** submit new Room */
     const addNewRoom =  async (e) => {
         e.preventDefault();
-        const response = await axios.post(AppConfig.serverAddress + "/api/chat/addRoom", chatInfo, {
+        await axios.post(AppConfig.serverAddress + "/api/chat/addRoom", chatInfo, {
             headers: {
               "Content-Type": "application/json",
             },

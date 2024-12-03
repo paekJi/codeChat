@@ -6,16 +6,17 @@ import { AppConfig } from "../../config/config";
 const FriendList = ()=>{
     const [friendList , setFriendList] = useState([]);
     const [searchWord, setSearchWord] = useState("");
+    console.log(Array.isArray(friendList));
 
     const [searchResult, setSearchResult] = useState([]);
 
     useEffect(()=>{
         const getFriendList = async () =>{
             const response =  await axios.get(AppConfig.serverAddress + "/api/friend/friendList");
-            if(response.data){
+            if(response.data && response.data.friendList){
+                console.log("없으면 넣지말라고", response.data.friendList);
                 setFriendList(response.data.friendList);
             }
-
         }
         getFriendList();
 
@@ -34,11 +35,16 @@ const FriendList = ()=>{
 
     /**search keyword */
     const getSearchResult = async ()=>{
-        const response = await axios.get(AppConfig.serverAddress + "/api/friend/searchUser",
-            {params : {searchWord : searchWord}});
-
-        if(response.data){
-            setSearchResult(response.data.searchResult);
+        try {
+            const response = await axios.get(AppConfig.serverAddress + "/api/friend/searchUser",
+                {params : {searchWord : searchWord}});
+    
+            if(response.data){
+                setSearchResult(response.data.searchResult);
+            }
+        } catch (error) {
+            console.log(error);
+            
         }
     }
 
@@ -77,7 +83,7 @@ const FriendList = ()=>{
                     searchResult.map((result, idx) => (
                         <div key={"div"+idx}>{idx} : 아이디 ::  {result.userId}  유저명 ::  {result.userName} 
                             <input key={"input" + idx}  type="button" data-id = {result._id}
-                                 value={friendList.find(friend => friend._id === result._id) ? "이미친구" : "요청"} 
+                                 value={friendList.find(friend => friend._id === result._id) ? "이미 친구" : "요청"} 
                                  onClick={requestFriend}/>
                         </div>
                     )))

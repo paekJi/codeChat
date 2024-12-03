@@ -6,7 +6,7 @@ const User = require("../model/user");
 /** get friend list  */
 const friendList = async (req) => {
     try {
-        const friendList = await User.findOne({ _id : req.session.userInfo._id })
+        const friendList = await User.find({ _id : req.session.userInfo._id })
                                 .populate("friend", "_id userId userName profileImg");
 
         return friendList;

@@ -12,9 +12,12 @@ const loginChk = async (req) => {
     try {
         const { userId, password } = req.body;
         const user = await User.findOne({ userId })
-                               .select("_id userId userName profileImg");
+                               .select("_id userId userName password profileImg");
+
+        console.log(`password : ${password} , stored password : ${user.password}`);
         if (user) {
             const isMatch = await bcrypt.compare(password, user.password);
+
             if (isMatch) { 
                 //token save 
                 const userToken = {
@@ -30,6 +33,7 @@ const loginChk = async (req) => {
             return null;
         }
     } catch (error) {
+        logger.error(`user login : ${error}`);
         console.log(error);
         return null;
     }
@@ -40,14 +44,22 @@ const SignIn = async (req) => {
     let processResult = false;
     try{
         const { userId, userName, password } = req.body;
-        //make hash
-        const hashedpass = await hashedPassword(password);
+        const user = await User.findOne({ userId });
+        
+        if(!user){
+            //make hash
+            const hashedpass = await hashedPassword(password);
 
-        // save user
-        const newUser = new User({ userId : userId, userName : userName, password: hashedpass });
-        await newUser.save();
-        logger.info("user sign in : ", newUser );
-        processResult = true;
+            // save user
+            const newUser = new User({ userId : userId, userName : userName, password: hashedpass });
+            await newUser.save();
+            logger.info("user sign in : ", newUser );
+            processResult = true;
+        }else{
+            logger.error("user sign in : same user error");
+        }
+
+
     }catch(error){
         logger.error(error);
     }

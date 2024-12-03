@@ -3,9 +3,12 @@ import React, { useState } from "react";
 
 import { AppConfig } from "../../config/config";
 import "../../static/style.css";
+import { useNavigate } from "react-router-dom";
 
 
 const UserSignIn = () => {
+  const navigate = useNavigate();
+
   //signin information
   const [signInInfo, setSignInInfo] = useState({
     userId: "",
@@ -17,15 +20,16 @@ const UserSignIn = () => {
   const signInProcess = async (e) => {
     if (signInInfo.userId && signInInfo.userName && signInInfo.password) {
       try {
-        const response = await axios.post(AppConfig.serverAddress + "/api/signIn", signInInfo, {
+        await axios.post(AppConfig.serverAddress + "/api/signIn", signInInfo, {
           headers: {
             "Content-Type": "application/json",
           },
         });
+        
+        alert("Account Created Successfully");
+        navigate("/login");
       } catch (error) {
-
-         alert("An unknown error occurred");
-         console.log(error);
+         alert("An error occurred. Please try again with a different ID");
         /** user info doesnt exist */
       }
     }
@@ -57,8 +61,8 @@ const UserSignIn = () => {
             </div>
 
             <div>
-                <input onClick={signInProcess} className="main-btn black-letter" type="button" value="BACK"/>
-                <input className="main-btn white-letter" type="button" value="SIGN IN"/>
+                <input onClick={() => window.history.back()} className="main-btn black-letter" type="button" value="BACK"/>
+                <input onClick={signInProcess} className="main-btn white-letter" type="button" value="SIGN IN"/>
             </div>
         </div>
   );

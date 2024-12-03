@@ -36,9 +36,9 @@ const loginChk = async (req, res) => {
 /** user sign in */
 const SignIn = (req, res) => {   
     if(loginService.SignIn(req)){
-        res.status(200);
+        res.status(200).json({message : "success"});
     }else{
-        res.status(401);
+        res.status(401).json({message : "error"});;
     }
 }
 
